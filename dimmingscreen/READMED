@@ -1,0 +1,2 @@
+Add the file /etc/pm/power.d/performance with the following contents;
+Remember to chmod u+x /etc/pm/power.d/performance afterwards.
