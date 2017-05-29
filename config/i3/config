@@ -10,6 +10,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+new_window pixel
 
 #Pascal Add
 #xautolock -time 10 -locker "i3lock -c 000000" &
@@ -134,7 +135,7 @@ bindsym $mod+a focus parent
 #bindsym $mod+m exec --no-startup-id "udisksctl mount -b /dev/sdb1 && gnome-terminal -x ranger /media/$USER/"
 #bindsym $mod+m exec --no-startup-id "udisksctl mount -b /dev/sde1 && i3-sensible-terminal -x ranger /media/$USER/"
 #bindsym $mod+m exec --no-startup-id "/home/pascal/.config/i3/auto-mount.sh"
-bindsym $mod+m exec --no-startup-id "sudo -u root sh -c \"mount Product\" ; sudo -u root sh -c \"mount VMs\" ; sudo -u root sh -c \"mount workspace\" ; sudo -u root sh -c \"mount project\";"
+bindsym $mod+m exec --no-startup-id "i3-sensible-terminal --new-tab -x sudo mount Product/ ;sudo mount VMs/ ;sudo mount workspace; sudo mount project;"
 #sudo -u root sh -c "mount Product"
 
 #bindsym $mod+n exec --no-startup-id "openvpn /home/pascal/Product/Redhat/OpenVPN/client.conf"
@@ -236,6 +237,7 @@ bindsym $mod+g mode "$mode_googleapp"
 exec --no-startup-id feh --bg-scale /usr/local/share/wallpaper/Iamarch2560x1440.png
 exec --no-startup-id fcitx-autostart
 exec --no-startup-id xss-lock -- i3lock -n -c 000000 
+exec --no-startup-id xbacklight -set 0%
 #exec --no-startup-id feh --bg-scale 
 #exec --no-startup-id dropbox start
 #exec --no-startup-id fcitx 
