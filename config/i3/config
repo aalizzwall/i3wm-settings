@@ -13,11 +13,7 @@ set $mod Mod4
 new_window pixel
 
 #Pascal Add
-#xautolock -time 10 -locker "i3lock -c 000000" &
-#exec --no-startup-id xautolock -time 10 -locker "i3lock -c 000000" &
 set $Locker "i3lock -c 000000 && sleep 1"
-# xss-lock -- i3lock -n -i background_image.png &
-# xss-lock -- i3lock -n  -c 000000 &
 
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -53,9 +49,6 @@ bindsym $mod+x mode "$mode_display"
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-#font pango:monospace 8
-#font pango:Source code pro 8
-#font pango:Noto Sans CJK TC 8
 font pango:Noto Mono CJK TC 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
@@ -132,11 +125,6 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-#bindsym $mod+m exec --no-startup-id "udisksctl mount -b /dev/sdb1 && gnome-terminal -x ranger /media/$USER/"
-#bindsym $mod+m exec --no-startup-id "udisksctl mount -b /dev/sde1 && i3-sensible-terminal -x ranger /media/$USER/"
-#bindsym $mod+m exec --no-startup-id "/home/pascal/.config/i3/auto-mount.sh"
-bindsym $mod+m exec --no-startup-id "i3-sensible-terminal --new-tab -x sudo mount Product/ ;sudo mount VMs/ ;sudo mount workspace; sudo mount project;"
-#sudo -u root sh -c "mount Product"
 
 #bindsym $mod+n exec --no-startup-id "openvpn /home/pascal/Product/Redhat/OpenVPN/client.conf"
 
@@ -178,16 +166,11 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 #Pascal Add 
 bindsym XF86MonBrightnessUp exec "xbacklight +20"
 bindsym XF86MonBrightnessDown exec "xbacklight -20"
-#bindsym XF86AudioRaiseVolume exec "amixer set Master 3%+ unmute"
-#bindsym XF86AudioLowerVolume exec "amixer set Master 3%- unmute"
-#bindsym XF86AudioMute exec "amixer -c 0 set Master mute"
 bindsym XF86AudioRaiseVolume exec "pamixer -i 3 -u"
 bindsym XF86AudioLowerVolume exec "pamixer -d 3 -u"
 bindsym XF86AudioMute exec "pamixer -t"
-#bindsym Print exec "gnome-screenshot -i"
 bindsym --release Print exec --no-startup-id scrot
 bindsym --release Shift+Print exec --no-startup-id scrot -s
-#bindsym $mod+m exec "virt-manager"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -215,18 +198,17 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-#List ALL
+#Google List ALL
 set $mode_googleapp All (a) Hangouts (h) Keep (k) Music (m) PttChrome (p) Calculator (c) LINE(l) Inbox (i)
 mode "$mode_googleapp" {
-  bindsym a exec "chromium --show-app-list" , mode "default"
-  bindsym h exec "chromium --profile-directory=Default --app-id=knipolnnllmklapflnccelgolnpehhpl", mode "default"
-  bindsym k exec "chromium --profile-directory=Default --app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki", mode "default"
-  #bindsym m exec "chromium --profile-directory=Default --app-id=icppfcnhkcmnfdhfhphakoifcfokfdhg", mode "default"
-  bindsym m exec "chromium --profile-directory=Default --app-id=fahmaaghhglfmonjliepjlchgpgfmobi", mode "default"
-  bindsym p exec "chromium --profile-directory=Default --app-id=hhnlfapopmaimdlldbknjdgekpgffmbo", mode "default"
-  bindsym c exec "chromium --profile-directory=Default --app-id=joodangkbfjnajiiifokapkpmhfnpleo", mode "default"
-  bindsym l exec "chromium --profile-directory=Default --app-id=menkifleemblimdogmoihpfopnplikde", mode "default"
-  bindsym i exec "chromium --profile-directory=Default https://inbox.google.com/", mode "default"
+  bindsym a exec --no-startup-id chromium --show-app-list , mode "default"
+  bindsym h exec --no-startup-id chromium --profile-directory=Default --app-id=knipolnnllmklapflnccelgolnpehhpl, mode "default"
+  bindsym k exec --no-startup-id chromium --profile-directory=Default --app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki, mode "default"
+  bindsym m exec --no-startup-id chromium --profile-directory=Default --app-id=fahmaaghhglfmonjliepjlchgpgfmobi, mode "default"
+  bindsym p exec --no-startup-id chromium --profile-directory=Default --app-id=hhnlfapopmaimdlldbknjdgekpgffmbo, mode "default"
+  bindsym c exec --no-startup-id chromium --profile-directory=Default --app-id=joodangkbfjnajiiifokapkpmhfnpleo, mode "default"
+  bindsym l exec --no-startup-id chromium --profile-directory=Default --app-id=menkifleemblimdogmoihpfopnplikde, mode "default"
+  bindsym i exec --no-startup-id chromium --profile-directory=Default https://inbox.google.com/, mode "default"
 
   # back to normal: Enter or Escape
   bindsym Return mode "default"
@@ -234,13 +216,25 @@ mode "$mode_googleapp" {
 }
 bindsym $mod+g mode "$mode_googleapp"
 
+#Mount
+set $mode_mount All (a) Hangouts (m) Mount (u) unMount
+mode "$mode_mount" {
+  bindsym m exec --no-startup-id udisksctl mount -b /dev/sde1 , mode "default"
+  bindsym u exec --no-startup-id udisksctl unmount -b /dev/sde1 , mode "default"
+  bindsym a exec --no-startup-id i3-sensible-terminal -x 'sudo mount Product && sudo mount VMs && sudo mount workspace && sudo mount project;' , mode "default"
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+m mode "$mode_mount"
+
+
+
 exec --no-startup-id feh --bg-scale /usr/local/share/wallpaper/Iamarch2560x1440.png
 exec --no-startup-id fcitx-autostart
 exec --no-startup-id xss-lock -- i3lock -n -c 000000 
 exec --no-startup-id xbacklight -set 0%
-#exec --no-startup-id feh --bg-scale 
-#exec --no-startup-id dropbox start
-#exec --no-startup-id fcitx 
 
 
 
@@ -248,7 +242,5 @@ exec --no-startup-id xbacklight -set 0%
 # finds out, if available)
 bar {
   status_command i3blocks
-  #status_command /home/pascal/.config/i3/measure-net-speed-i3status.bash
-  #status_command /home/pascal/.config/i3/net-speed.sh
   tray_output primary
 }
