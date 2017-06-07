@@ -1,4 +1,5 @@
-##SetUp Config
+## SetUp Config
+
 ```bash
 $ cd 
 $ git clone git@github.com:aalizzwall/i3wm-settings.git
