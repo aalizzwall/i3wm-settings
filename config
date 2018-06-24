@@ -13,7 +13,7 @@ set $mod Mod4
 new_window pixel
 
 #Pascal Add
-set $Locker "i3lock -n -c 000000 ;xset dpms force off"
+set $Locker "xset dpms force off && i3lock -n -c 000000"
 
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
