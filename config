@@ -13,7 +13,7 @@ set $mod Mod4
 new_window pixel
 
 #Pascal Add
-set $Locker "xset dpms force off"
+set $Locker "i3lock -n -c 000000 ;xset dpms force off"
 
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -31,15 +31,15 @@ mode "$mode_system" {
 }
 
 bindsym $mod+Pause mode "$mode_system"
+
+set $External $(xrandr | grep " connected" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/" |grep -v DP-0)
 ## Manual management of external displays
 ## Set the shortcuts and what they do
 set $mode_display Ext Screen (l|r) HDMI ON, (h) DP ON, (x) HDMI OFF, (y) DP OFF
 mode "$mode_display" {
-  bindsym r exec --no-startup-id xrandr --output HDMI-0 --auto --right-of DP-0, mode "default"
-  bindsym l exec --no-startup-id xrandr --output HDMI-0 --auto --left-of DP-0, mode "default"
-  bindsym h exec --no-startup-id xrandr --output DP-[1-4] --auto --right-of DP-0, mode "default"
-  bindsym x exec --no-startup-id xrandr --output HDMI-0 --auto --off, mode "default"
-  bindsym y exec --no-startup-id xrandr --output DP-[1-4] --auto --off, mode "default"
+  bindsym r exec --no-startup-id xrandr --output $External --auto --right-of DP-0, mode "default"
+  bindsym l exec --no-startup-id xrandr --output $External --auto --left-of DP-0, mode "default"
+  bindsym x exec --no-startup-id xrandr --output $External --auto --off, mode "default"
 
   # back to normal: Enter or Escape
   bindsym Return mode "default"
@@ -216,7 +216,7 @@ mode "$mode_googleapp" {
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
-bindsym $mod+g mode "$mode_googleapp"
+bindsym $mod+c mode "$mode_googleapp"
 
 #Mount
 set $mode_mount All (a) Hangouts (m) Mount (u) unMount
@@ -233,7 +233,7 @@ bindsym $mod+m mode "$mode_mount"
 
 
 
-exec --no-startup-id feh --bg-scale /usr/local/share/wallpaper/Iamarch2560x1440.png
+exec --no-startup-id feh --bg-scale /usr/local/share/wallpaper/GOD.JPG
 exec --no-startup-id fcitx-autostart
 exec --no-startup-id xss-lock -- i3lock -n -c 000000 
 exec --no-startup-id xbacklight -set 0%
